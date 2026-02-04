@@ -1,7 +1,6 @@
 # 🎁 Tiny Surprise Website
 
-> A small, cute website generator for creating simple surprise pages  
-> Pick a style, customize the message, share the link ✨
+> A small, cute website for creating simple surprise for your Valentine dont worry i didnt add any watermark on code :))
 
 ![Banner](https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80)
 
