@@ -17,8 +17,6 @@ It’s designed to be **easy to host**, **easy to customize**, and **easy to sha
 
 ## ✨ Features
 
-✨ Multiple styles to choose from  
-✨ Custom text & colors  
 ✨ Mobile-friendly layout  
 ✨ Lightweight & fast  
 ✨ Free hosting compatible  
