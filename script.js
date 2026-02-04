@@ -29,7 +29,7 @@ yesBtn.addEventListener('click', function() {
         const finalPage = document.getElementById('finalPage');
         finalPage.classList.add('active');
         startContinuousAnimations();
-    }, 10000);
+    }, 5000);
 });
 
 noBtn.addEventListener('click', function(e) {
@@ -241,7 +241,27 @@ document.addEventListener('DOMContentLoaded', function() {
         heart.style.animationDelay = Math.random() * 5 + 's';
         heartBg.appendChild(heart);
     }
+    
+    let lastPawTime = 0;
+    document.addEventListener('mousemove', function(e) {
+        const now = Date.now();
+        if (now - lastPawTime > 100) {
+            createPawPrint(e.clientX, e.clientY);
+            lastPawTime = now;
+        }
+    });
 });
+
+function createPawPrint(x, y) {
+    const paw = document.createElement('div');
+    paw.className = 'paw-print';
+    paw.textContent = '🐾';
+    paw.style.left = x + 'px';
+    paw.style.top = y + 'px';
+    document.body.appendChild(paw);
+    
+    setTimeout(() => paw.remove(), 1000);
+}
 
 function startContinuousAnimations() {
     const gifOverlay = document.getElementById('gifOverlay');
@@ -259,6 +279,110 @@ function startContinuousAnimations() {
     setInterval(() => {
         createContinuousConfettiPiece(continuousConfetti);
     }, 100);
+}
+
+const memoriesBtn = document.getElementById('memoriesBtn');
+if (memoriesBtn) {
+    memoriesBtn.addEventListener('click', function() {
+        const memoryGallery = document.getElementById('memoryGallery');
+        memoryGallery.classList.add('active');
+        startGalleryAnimations();
+    });
+}
+
+function startGalleryAnimations() {
+    const gallery = document.getElementById('floatingHeartsGallery');
+    
+    setInterval(() => {
+        createFloatingGalleryHeart(gallery);
+    }, 500);
+    
+    setInterval(() => {
+        createSparkle();
+    }, 300);
+    
+    const photoCards = document.querySelectorAll('.photo-card');
+    photoCards.forEach((card, index) => {
+        card.addEventListener('mouseenter', function() {
+            createCardHearts(card);
+        });
+    });
+}
+
+function createFloatingGalleryHeart(container) {
+    const hearts = ['💕', '💖', '💗', '💓', '❤️', '💝'];
+    const heart = document.createElement('div');
+    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.style.position = 'absolute';
+    heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.bottom = '-30px';
+    heart.style.opacity = '0.6';
+    heart.style.pointerEvents = 'none';
+    
+    container.appendChild(heart);
+    
+    heart.animate([
+        { 
+            bottom: '-30px',
+            opacity: 0.6,
+            transform: 'rotate(0deg) translateX(0)'
+        },
+        { 
+            bottom: '110%',
+            opacity: 0,
+            transform: `rotate(${Math.random() * 360}deg) translateX(${Math.random() * 100 - 50}px)`
+        }
+    ], {
+        duration: Math.random() * 3000 + 4000,
+        easing: 'ease-out'
+    });
+    
+    setTimeout(() => heart.remove(), 7000);
+}
+
+function createSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = Math.random() * 100 + '%';
+    sparkle.style.top = Math.random() * 100 + '%';
+    document.querySelector('.memory-gallery-inner').appendChild(sparkle);
+    
+    setTimeout(() => sparkle.remove(), 2000);
+}
+
+function createCardHearts(card) {
+    const hearts = ['💕', '✨', '💖', '⭐'];
+    const count = 5;
+    
+    for (let i = 0; i < count; i++) {
+        const heart = document.createElement('div');
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.position = 'absolute';
+        heart.style.fontSize = Math.random() * 15 + 10 + 'px';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.top = Math.random() * 100 + '%';
+        heart.style.pointerEvents = 'none';
+        heart.style.zIndex = '10';
+        
+        card.appendChild(heart);
+        
+        heart.animate([
+            { 
+                opacity: 1,
+                transform: 'translateY(0) scale(0)'
+            },
+            { 
+                opacity: 0,
+                transform: `translateY(-50px) scale(1.5)`
+            }
+        ], {
+            duration: 1000,
+            easing: 'ease-out'
+        });
+        
+        setTimeout(() => heart.remove(), 1000);
+    }
 }
 
 function createGifExplosion(container) {
