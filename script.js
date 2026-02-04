@@ -36,6 +36,8 @@ noBtn.addEventListener('click', function(e) {
     const container = document.querySelector('.container');
     container.classList.add('shake');
     setTimeout(() => container.classList.remove('shake'), 500);
+
+    createClickHearts(e);
     
     if (noClickCount === 1) {
         noBtn.style.fontSize = '1rem';
@@ -133,6 +135,47 @@ function createConfetti() {
         confetti.style.animationDelay = Math.random() * 0.5 + 's';
         confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
         confettiContainer.appendChild(confetti);
+    }
+}
+
+function createClickHearts(e) {
+    const heartsCount = 8;
+    const heartEmojis = ['💕', '💖', '💗', '💓', '💝', '❤️', '💘', '✨'];
+    
+    for (let i = 0; i < heartsCount; i++) {
+        const heart = document.createElement('div');
+        heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        heart.style.position = 'fixed';
+        heart.style.left = e.clientX + 'px';
+        heart.style.top = e.clientY + 'px';
+        heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+        heart.style.pointerEvents = 'none';
+        heart.style.zIndex = '9999';
+        heart.style.userSelect = 'none';
+        
+        const angle = (Math.PI * 2 * i) / heartsCount;
+        const velocity = 100;
+        const tx = Math.cos(angle) * velocity;
+        const ty = Math.sin(angle) * velocity;
+        
+        heart.style.animation = 'none';
+        document.body.appendChild(heart);
+        
+        heart.animate([
+            { 
+                transform: 'translate(0, 0) scale(0) rotate(0deg)',
+                opacity: 1 
+            },
+            { 
+                transform: `translate(${tx}px, ${ty}px) scale(1.5) rotate(${Math.random() * 360}deg)`,
+                opacity: 0 
+            }
+        ], {
+            duration: 1000,
+            easing: 'cubic-bezier(0, 0.5, 0.5, 1)'
+        });
+        
+        setTimeout(() => heart.remove(), 1000);
     }
 }
 
