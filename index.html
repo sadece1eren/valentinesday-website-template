@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valentine's Day Surprise</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Will you be my Valentine this year?</h1>
-    <div class="buttons">
-      <button id="yes-button">Yes</button>
-      <button id="no-button">No</button>
+    <div class="hearts-background"></div>
+    
+    <div class="container">
+        <div class="image-container">
+            <img src="assets/heart.png" alt="heart" class="heart-icon">
+        </div>
+        
+        <h1 class="question">Will You Be My Valentine This Year Too?</h1>
+        
+        <div class="cute-message">
+            <p id="message">I've been waiting all year to ask you this... 💖</p>
+        </div>
+        
+        <div class="buttons-container">
+            <button id="yesBtn" class="btn yes-btn">Yes! 💕</button>
+            <button id="noBtn" class="btn no-btn">No</button>
+        </div>
     </div>
-    <img src="assets/images/heart.png" alt="Heart" class="heart">
-  </div>
-  <script src="script.js"></script>
+
+    <div class="confetti-container" id="confetti"></div>
+    
+    <div class="celebration" id="celebration">
+        <div class="celebration-content">
+            <h2>Yay! 🎉</h2>
+            <p>You just made me the happiest person alive!</p>
+            <div class="hearts-explosion"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
