@@ -2,7 +2,7 @@
 
 > A small, cute website for creating simple surprise for your Valentine dont worry i didnt add any watermark on code :))
 
-![Banner](https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80)
+![Banner](assets/images/image.png)
 
 ---
 
@@ -68,8 +68,8 @@ Everything is kept simple on purpose.
 
 ## 🖼️ Preview
 
-![Preview](ididntmakethewebsiteyetlmao)
-
+![Preview](assets/images/image.png)
+![Preview](assets/images/image.png)
 ---
 
 ## 📦 Folder Structure
