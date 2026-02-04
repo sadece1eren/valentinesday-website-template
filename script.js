@@ -23,6 +23,13 @@ yesBtn.addEventListener('click', function() {
     celebration.classList.add('active');
     createHeartExplosion();
     createConfetti();
+    
+    setTimeout(() => {
+        celebration.classList.remove('active');
+        const finalPage = document.getElementById('finalPage');
+        finalPage.classList.add('active');
+        startContinuousAnimations();
+    }, 10000);
 });
 
 noBtn.addEventListener('click', function(e) {
@@ -36,8 +43,6 @@ noBtn.addEventListener('click', function(e) {
     const container = document.querySelector('.container');
     container.classList.add('shake');
     setTimeout(() => container.classList.remove('shake'), 500);
-
-    createClickHearts(e);
     
     if (noClickCount === 1) {
         noBtn.style.fontSize = '1rem';
@@ -90,8 +95,90 @@ noBtn.addEventListener('mouseenter', function() {
         
         noBtn.classList.add('spin');
         setTimeout(() => noBtn.classList.remove('spin'), 1000);
+        
+        createSadHearts(noBtn);
     }
 });
+
+yesBtn.addEventListener('mouseenter', function() {
+    createHappyHearts(yesBtn);
+});
+
+function createSadHearts(element) {
+    const rect = element.getBoundingClientRect();
+    const heartsCount = 5;
+    const sadHearts = ['🖤', '💔', '😢'];
+    
+    for (let i = 0; i < heartsCount; i++) {
+        const heart = document.createElement('div');
+        heart.textContent = sadHearts[Math.floor(Math.random() * sadHearts.length)];
+        heart.style.position = 'fixed';
+        heart.style.left = rect.left + rect.width / 2 + 'px';
+        heart.style.top = rect.top + rect.height / 2 + 'px';
+        heart.style.fontSize = '20px';
+        heart.style.pointerEvents = 'none';
+        heart.style.zIndex = '9999';
+        
+        document.body.appendChild(heart);
+        
+        const angle = (Math.PI * 2 * i) / heartsCount;
+        const distance = 60;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+        
+        heart.animate([
+            { 
+                transform: 'translate(-50%, -50%) scale(0)',
+                opacity: 1 
+            },
+            { 
+                transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(1)`,
+                opacity: 0 
+            }
+        ], {
+            duration: 800,
+            easing: 'ease-out'
+        });
+        
+        setTimeout(() => heart.remove(), 800);
+    }
+}
+
+function createHappyHearts(element) {
+    const rect = element.getBoundingClientRect();
+    const heartsCount = 3;
+    const happyHearts = ['💕', '💖', '❤️', '✨', '🌟'];
+    
+    for (let i = 0; i < heartsCount; i++) {
+        const heart = document.createElement('div');
+        heart.textContent = happyHearts[Math.floor(Math.random() * happyHearts.length)];
+        heart.style.position = 'fixed';
+        heart.style.left = rect.left + rect.width / 2 + (Math.random() - 0.5) * 40 + 'px';
+        heart.style.top = rect.top + 'px';
+        heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+        heart.style.pointerEvents = 'none';
+        heart.style.zIndex = '9999';
+        
+        document.body.appendChild(heart);
+        
+        heart.animate([
+            { 
+                transform: 'translateY(0) scale(0)',
+                opacity: 1 
+            },
+            { 
+                transform: `translateY(-80px) scale(1.2)`,
+                opacity: 0 
+            }
+        ], {
+            duration: 1200 + Math.random() * 400,
+            easing: 'ease-out',
+            delay: Math.random() * 200
+        });
+        
+        setTimeout(() => heart.remove(), 1600);
+    }
+}
 
 function makeNoButtonMove() {
     const container = document.querySelector('.buttons-container');
@@ -109,76 +196,32 @@ function makeNoButtonMove() {
 
 function createHeartExplosion() {
     const heartsExplosion = document.querySelector('.hearts-explosion');
-    const heartEmojis = ['💕', '💖', '💗', '💓', '💝', '❤️', '💘', '✨', '🌟', '⭐'];
+    const heartEmojis = ['💕', '💖', '💗', '💓', '💝', '❤️', '💘'];
     
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
         const heart = document.createElement('div');
         heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
         heart.style.position = 'absolute';
-        heart.style.fontSize = Math.random() * 40 + 25 + 'px';
+        heart.style.fontSize = Math.random() * 30 + 20 + 'px';
         heart.style.left = Math.random() * 100 + '%';
-        heart.style.top = '100%';
-        heart.style.animation = `floatUp ${Math.random() * 2 + 2}s ease-out forwards`;
-        heart.style.animationDelay = Math.random() * 1 + 's';
+        heart.style.top = Math.random() * 100 + '%';
+        heart.style.animation = `confettiFall ${Math.random() * 2 + 2}s ease-out forwards`;
+        heart.style.animationDelay = Math.random() * 0.5 + 's';
         heartsExplosion.appendChild(heart);
     }
 }
 
 function createConfetti() {
-    const colors = ['#ff6b9d', '#ffc2d1', '#ff3366', '#ffe5ec', '#ff1744', '#ff69b4'];
+    const colors = ['#ff6b9d', '#ffc2d1', '#ff3366', '#ffe5ec', '#ff1744'];
     
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < 100; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti-piece';
         confetti.style.left = Math.random() * 100 + '%';
         confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.width = Math.random() * 15 + 5 + 'px';
-        confetti.style.height = Math.random() * 15 + 5 + 'px';
-        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        confetti.style.animationDelay = Math.random() * 0.3 + 's';
+        confetti.style.animationDelay = Math.random() * 0.5 + 's';
         confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
         confettiContainer.appendChild(confetti);
-    }
-}
-
-function createClickHearts(e) {
-    const heartsCount = 8;
-    const heartEmojis = ['💕', '💖', '💗', '💓', '💝', '❤️', '💘', '✨'];
-    
-    for (let i = 0; i < heartsCount; i++) {
-        const heart = document.createElement('div');
-        heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-        heart.style.position = 'fixed';
-        heart.style.left = e.clientX + 'px';
-        heart.style.top = e.clientY + 'px';
-        heart.style.fontSize = Math.random() * 20 + 15 + 'px';
-        heart.style.pointerEvents = 'none';
-        heart.style.zIndex = '9999';
-        heart.style.userSelect = 'none';
-        
-        const angle = (Math.PI * 2 * i) / heartsCount;
-        const velocity = 100;
-        const tx = Math.cos(angle) * velocity;
-        const ty = Math.sin(angle) * velocity;
-        
-        heart.style.animation = 'none';
-        document.body.appendChild(heart);
-        
-        heart.animate([
-            { 
-                transform: 'translate(0, 0) scale(0) rotate(0deg)',
-                opacity: 1 
-            },
-            { 
-                transform: `translate(${tx}px, ${ty}px) scale(1.5) rotate(${Math.random() * 360}deg)`,
-                opacity: 0 
-            }
-        ], {
-            duration: 1000,
-            easing: 'cubic-bezier(0, 0.5, 0.5, 1)'
-        });
-        
-        setTimeout(() => heart.remove(), 1000);
     }
 }
 
@@ -199,3 +242,126 @@ document.addEventListener('DOMContentLoaded', function() {
         heartBg.appendChild(heart);
     }
 });
+
+function startContinuousAnimations() {
+    const gifOverlay = document.getElementById('gifOverlay');
+    const continuousHearts = document.getElementById('continuousHearts');
+    const continuousConfetti = document.getElementById('continuousConfetti');
+    
+    setInterval(() => {
+        createGifExplosion(gifOverlay);
+    }, 2000);
+    
+    setInterval(() => {
+        createContinuousHeart(continuousHearts);
+    }, 300);
+    
+    setInterval(() => {
+        createContinuousConfettiPiece(continuousConfetti);
+    }, 100);
+}
+
+function createGifExplosion(container) {
+    const hearts = ['💕', '💖', '💗', '💓', '✨', '⭐'];
+    const count = 8;
+    
+    for (let i = 0; i < count; i++) {
+        const heart = document.createElement('div');
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.position = 'absolute';
+        heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+        heart.style.left = '50%';
+        heart.style.top = '50%';
+        heart.style.pointerEvents = 'none';
+        
+        container.appendChild(heart);
+        
+        const angle = (Math.PI * 2 * i) / count;
+        const distance = 150;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+        
+        heart.animate([
+            { 
+                transform: 'translate(-50%, -50%) scale(0)',
+                opacity: 1 
+            },
+            { 
+                transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(1.5)`,
+                opacity: 0 
+            }
+        ], {
+            duration: 1500,
+            easing: 'ease-out'
+        });
+        
+        setTimeout(() => heart.remove(), 1500);
+    }
+}
+
+function createContinuousHeart(container) {
+    const hearts = ['💕', '💖', '💗', '💓', '❤️', '💝'];
+    const heart = document.createElement('div');
+    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    heart.style.position = 'absolute';
+    heart.style.fontSize = Math.random() * 25 + 15 + 'px';
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.bottom = '-50px';
+    heart.style.opacity = '0';
+    
+    container.appendChild(heart);
+    
+    heart.animate([
+        { 
+            bottom: '-50px',
+            opacity: 0,
+            transform: 'rotate(0deg)'
+        },
+        { 
+            bottom: '50%',
+            opacity: 1,
+            transform: `rotate(${Math.random() * 360}deg)`
+        },
+        { 
+            bottom: '110%',
+            opacity: 0,
+            transform: `rotate(${Math.random() * 720}deg)`
+        }
+    ], {
+        duration: Math.random() * 2000 + 3000,
+        easing: 'ease-out'
+    });
+    
+    setTimeout(() => heart.remove(), 5000);
+}
+
+function createContinuousConfettiPiece(container) {
+    const colors = ['#ff6b9d', '#ffc2d1', '#ff3366', '#ffe5ec', '#ff1744', '#ff69b4', '#ffffff'];
+    const confetti = document.createElement('div');
+    confetti.style.position = 'absolute';
+    confetti.style.width = Math.random() * 10 + 5 + 'px';
+    confetti.style.height = Math.random() * 10 + 5 + 'px';
+    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.left = Math.random() * 100 + '%';
+    confetti.style.top = '-20px';
+    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+    confetti.style.opacity = '0.8';
+    
+    container.appendChild(confetti);
+    
+    confetti.animate([
+        { 
+            top: '-20px',
+            transform: 'rotate(0deg)'
+        },
+        { 
+            top: '110%',
+            transform: `rotate(${Math.random() * 720}deg)`
+        }
+    ], {
+        duration: Math.random() * 2000 + 2000,
+        easing: 'linear'
+    });
+    
+    setTimeout(() => confetti.remove(), 4000);
+}
