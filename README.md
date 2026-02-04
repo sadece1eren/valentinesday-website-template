@@ -69,7 +69,7 @@ Everything is kept simple on purpose.
 ## 🖼️ Preview
 
 ![Preview](assets/images/image.png)
-![Preview](assets/images/image.png)
+![Preview](assets/images/image2.png)
 ---
 
 ## 📦 Folder Structure
