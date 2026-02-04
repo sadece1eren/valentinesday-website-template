@@ -402,6 +402,11 @@ body {
     text-align: center;
     position: relative;
     z-index: 2001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
 }
 
 .gif-container {
@@ -449,6 +454,7 @@ body {
 
 .special-date {
     margin-top: 2rem;
+    margin-bottom: 0.5rem;
     font-family: 'Quicksand', sans-serif;
     font-size: 1.4rem;
     color: white;
@@ -490,7 +496,7 @@ body {
 }
 
 .see-memories-btn {
-    margin-top: 3rem;
+    margin-top: 2.5rem;
     font-family: 'Pacifico', cursive;
     font-size: 1.8rem;
     padding: 1.5rem 3.5rem;
@@ -619,6 +625,7 @@ body {
     .special-date {
         font-size: 1.1rem;
         margin-top: 1.5rem;
+        margin-bottom: 1rem;
     }
     
     .special-date::before,
@@ -635,8 +642,15 @@ body {
     }
     
     .see-memories-btn {
-        font-size: 1.4rem;
-        padding: 1.2rem 2.5rem;
+        font-size: 1.3rem;
+        padding: 1rem 2rem;
+        margin-top: 2rem;
+    }
+    
+    .see-memories-btn::after {
+        font-size: 1.5rem;
+        top: -25px;
+        right: -15px;
     }
 }
 
@@ -830,5 +844,41 @@ body {
     
     .photo-wrapper {
         height: 280px;
+    }
+}
+
+@media (max-width: 400px) {
+    .final-content {
+        padding: 1rem;
+    }
+    
+    .gif-container {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 2rem;
+    }
+    
+    .names-container {
+        font-size: 1.4rem;
+    }
+    
+    .special-date {
+        font-size: 1rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .special-date::before {
+        left: -25px;
+    }
+    
+    .special-date::after {
+        right: -25px;
+    }
+    
+    .see-memories-btn {
+        font-size: 1.1rem;
+        padding: 0.9rem 1.8rem;
+        margin-top: 2.5rem;
     }
 }
