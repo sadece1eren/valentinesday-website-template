@@ -39,9 +39,8 @@ Open → edit → upload.
 
 1. Download or clone the project
 2. Open `index.html`
-3. Choose a theme or style
-4. Customize the text
-5. Upload to a free hosting service
+3. Customize the text
+4. Upload to a free hosting service
 
 ### Free Hosting Options
 - GitHub Pages
@@ -56,9 +55,8 @@ Share the link and you’re done 🎉
 ## 🎨 Customization
 
 You can easily:
-- Switch between styles
 - Edit messages
-- Change colors & fonts
+- Change colors & fonts (if you want)
 - Add images or icons
 - Disable or enable animations
 
