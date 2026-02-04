@@ -109,30 +109,33 @@ function makeNoButtonMove() {
 
 function createHeartExplosion() {
     const heartsExplosion = document.querySelector('.hearts-explosion');
-    const heartEmojis = ['💕', '💖', '💗', '💓', '💝', '❤️', '💘'];
+    const heartEmojis = ['💕', '💖', '💗', '💓', '💝', '❤️', '💘', '✨', '🌟', '⭐'];
     
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 50; i++) {
         const heart = document.createElement('div');
         heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
         heart.style.position = 'absolute';
-        heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+        heart.style.fontSize = Math.random() * 40 + 25 + 'px';
         heart.style.left = Math.random() * 100 + '%';
-        heart.style.top = Math.random() * 100 + '%';
-        heart.style.animation = `confettiFall ${Math.random() * 2 + 2}s ease-out forwards`;
-        heart.style.animationDelay = Math.random() * 0.5 + 's';
+        heart.style.top = '100%';
+        heart.style.animation = `floatUp ${Math.random() * 2 + 2}s ease-out forwards`;
+        heart.style.animationDelay = Math.random() * 1 + 's';
         heartsExplosion.appendChild(heart);
     }
 }
 
 function createConfetti() {
-    const colors = ['#ff6b9d', '#ffc2d1', '#ff3366', '#ffe5ec', '#ff1744'];
+    const colors = ['#ff6b9d', '#ffc2d1', '#ff3366', '#ffe5ec', '#ff1744', '#ff69b4'];
     
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 150; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti-piece';
         confetti.style.left = Math.random() * 100 + '%';
         confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = Math.random() * 0.5 + 's';
+        confetti.style.width = Math.random() * 15 + 5 + 'px';
+        confetti.style.height = Math.random() * 15 + 5 + 'px';
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        confetti.style.animationDelay = Math.random() * 0.3 + 's';
         confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
         confettiContainer.appendChild(confetti);
     }
